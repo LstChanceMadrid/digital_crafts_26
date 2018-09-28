@@ -1,5 +1,6 @@
 import json
 import datetime
+from math import floor
 
 
 current_time_hour_minute =f"{datetime.datetime.now().strftime('%H:%M:%S')}"
@@ -47,7 +48,7 @@ def pool_table_manager():
     option = input("Enter desired option: ")
 
     if (option.lower() == 'r'):
-        new_game()
+        choose_table()
 
     elif (option.lower() == 'e'):
         end_game()
@@ -71,7 +72,7 @@ def view_table_statuses(all_pool_tables):
                 print(f"Table {pool_table['pool_table_number']} - {not_occupied}")
 
             else:
-                print(f"Table {pool_table['pool_table_number']} - {occupied} {datetime.datetime.strptime(pool_table['start_date_time'], '%H%M%S').time()}")
+                print(f"Table {pool_table['pool_table_number']} - {occupied} Start: {datetime.datetime.strptime(pool_table['start_date_time'], '%H%M%S').time()} Total: {datetime.datetime.combine(datetime.date.today(), datetime.datetime.now().time()) - datetime.datetime.combine(datetime.date.today(), datetime.datetime.strptime(pool_table['start_date_time'], '%H%M%S').time())}")
 
     print("")
     print(f"Current time is - {current_time_hour_minute}")
