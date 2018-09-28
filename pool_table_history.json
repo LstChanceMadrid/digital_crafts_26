@@ -1,1 +1,26 @@
-"14:32:32"
+[
+    {
+        "pool_table_number": 2,
+        "start_date_time": "142358",
+        "end_date_time": "142415",
+        "total_time_played": "0:00:17"
+    },
+    {
+        "pool_table_number": 1,
+        "start_date_time": "143648",
+        "end_date_time": "143652",
+        "total_time_played": "0:00:04"
+    },
+    {
+        "pool_table_number": 5,
+        "start_date_time": "142324",
+        "end_date_time": "143748",
+        "total_time_played": "0:14:24"
+    },
+    {
+        "pool_table_number": 8,
+        "start_date_time": "144113",
+        "end_date_time": "144758",
+        "total_time_played": "0:06:45"
+    }
+]
