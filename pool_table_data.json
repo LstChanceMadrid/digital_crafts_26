@@ -19,9 +19,9 @@
     },
     {
         "pool_table_number": 4,
-        "start_date_time": "0",
+        "start_date_time": "172139",
         "end_date_time": "0",
-        "total_time_played": 0
+        "total_time_played": "0"
     },
     {
         "pool_table_number": 5,
@@ -61,9 +61,9 @@
     },
     {
         "pool_table_number": 11,
-        "start_date_time": "145455",
+        "start_date_time": "0",
         "end_date_time": "0",
-        "total_time_played": 0
+        "total_time_played": "0"
     },
     {
         "pool_table_number": 12,
