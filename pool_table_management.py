@@ -118,25 +118,17 @@ def choose_table():
                 if (occupancy == "0"):
                     rent_option = input("Would you like to rent this table? 'y'/'n': ")
 
-                    if (rent_option == 'y'):
-                        start = datetime.datetime.now()
-                        pool_table_number[table_selection - 1]["start_date_time"] = start.strftime('%H%M%S')
-                        start_time = pool_table_number[table_selection - 1]["start_date_time"]
-                        print("good to go")
-                        print("")
+                    if (rent_option.lower() == 'y'):
 
-   
-                        with open("pool_table_data.json", "w") as json_object:
-                            json.dump(pool_table_number, json_object,indent=4)
+                        rent(table_selection)  
 
-                    elif (rent_option == 'n'):
+                    elif (rent_option.lower() == 'n'):
                         choose_table()
+
                     else:
                         print("That was an invalid option.")
                         choose_table()
             
-                print("You have now rented this table!")
-                print(f"Your start time is {start.strftime('%H:%M')}")
 
                 pool_table_manager()
         except ValueError:
@@ -148,14 +140,17 @@ def choose_table():
 
 
 def rent(table_selection):
-    start = datetime.datetime.now()
-    pool_table_number[table_selection - 1]["start_date_time"] = start.strftime('%H%M%S')
-    start_time = pool_table_number[table_selection - 1]["start_date_time"]
-    print("good to go")
-    print("")
-    print("You have now rented this table!")
-    print(f"Your start time is {start.strftime('%H:%M')}")
-
+    with open("pool_table_data.json", "r") as json_object:
+        pool_table_number = json.load(json_object)
+        start = datetime.datetime.now()
+        pool_table_number[table_selection - 1]["start_date_time"] = start.strftime('%H%M%S')
+        start_time = pool_table_number[table_selection - 1]["start_date_time"]
+        print("good to go")
+        print("")
+        print("You have now rented this table!")
+        print(f"Your start time is {start.strftime('%H:%M')}")
+        with open("pool_table_data.json", "w") as json_object:
+            json.dump(pool_table_number, json_object,indent=4)
 
 
 
@@ -190,24 +185,25 @@ def end_table():
                     end = input("Would you like to end this table rental? 'y'/'n': ")
 
                     if (end == 'y'):
+                        #prints the time the rental was ended
                         end = datetime.datetime.now()
                         pool_table_number[table_selection - 1]["end_date_time"] = end.strftime('%H%M%S')
                         end_time = pool_table_number[table_selection - 1]["end_date_time"]
 
                         print("good to go")
-                        print(end_time)
                 
                         end = datetime.datetime.strptime(pool_table_number[table_selection - 1]["end_date_time"], "%H%M%S").time()
-                        start = datetime.datetime.strptime(pool_table_number[table_selection - 1]["start_date_time"], "%H%M%S").time()
-                    
-                        print(end)
-                        total_1 = datetime.datetime.combine(datetime.date.today(), end) - datetime.datetime.combine(datetime.date.today(), start)
 
-                        print(total_1)
-                        total_1 = str(total_1)
+                        start = datetime.datetime.strptime(pool_table_number[table_selection - 1]["start_date_time"], "%H%M%S").time()
+                        print(f"Your end time is {end}")
+
+                        total_time = datetime.datetime.combine(datetime.date.today(), end) - datetime.datetime.combine(datetime.date.today(), start)
+
+                        print(total_time)
+                        total_time = str(total_time)
 
                 
-                        pool_table_number[table_selection-1]["total_time_played"] = total_1
+                        pool_table_number[table_selection-1]["total_time_played"] = total_time
                 
                 
 
@@ -233,6 +229,7 @@ def end_table():
                         pool_table_number[table_selection - 1]["end_date_time"] = "0"
 
                         pool_table_number[table_selection - 1]["total_time_played"] = "0"
+
                         with open("pool_table_data.json", "w") as json_object:
                             json.dump(pool_table_number, json_object,indent=4)
 
@@ -250,6 +247,21 @@ def end_table():
         except IndexError:
             print("That was an invalid option.")
             pool_table_manager()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # will completely reset all data inside of the pool_table_data.json file to its base state (DELETES ALL DATA!)
